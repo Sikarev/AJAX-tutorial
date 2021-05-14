@@ -1,0 +1,39 @@
+N1
+// Чтобы подключить Jquery, нужно пройти по ссылке  code.jquery.com, и там выбрать версию Jquery (пока неважно какую), после чего скопировать скрипт и вставить в index.js
+// Первый ajax-запрос:
+$.ajax('https://repetitora.net/api/JS/Images');
+
+
+
+N2
+// Чтобы обработать ответ от ajax-запроса нам нужен callback
+Пример:
+$.ajax('https://repetitora.net/api/JS/Images', {
+    success: function () {
+        console.log('I get response');
+    }
+});
+
+Callback-функции нужны для ассинхронной работы js
+//ajax-запросы ассинхронны, поэтому в этом коде
+onsole.log(0);
+$.ajax('https://repetitora.net/api/JS/Images', {
+    success: function () {
+        console.log('I get response');
+    }
+});
+console.log(1);
+
+В консоли будет выведено сначала 0, затем 1, и только потом I get response:
+
+
+Пример доставания изображений из ajax-запросов:
+$.ajax('https://repetitora.net/api/JS/Images', {
+    success: function (data) {
+        data.forEach(el => {
+            const img = document.createElement('img');
+            img.src = el.thumbnail;
+            document.querySelector('body').appendChild(img);
+        });
+    }
+});
