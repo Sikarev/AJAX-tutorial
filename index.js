@@ -1,25 +1,23 @@
-console.log(0);
-$.ajax('https://repetitora.net/api/JS/Images', {
+const resultBlock = document.querySelector("#result");
+const clickMeButton = document.querySelector("#click-me");
+const pageNumber = document.querySelector("#page-number");
+clickMeButton.addEventListener("click", makeRequest);
+
+console.log(pageNumber);
+function makeRequest() {
+    $.ajax(`https://repetitora.net/api/JS/Images?page=${pageNumber.value}&count=1`, {
     success: function (data) {
         data.forEach(el => {
             const img = document.createElement('img');
             img.src = el.thumbnail;
-            document.querySelector('body').appendChild(img);
+            document.querySelector('#result').appendChild(img);
         });
     }
 });
+}
+
+console.log(0);
+
 console.log(1);
 
 
-
-
-
-
-
-const resultBlock = document.querySelector("#result");
-const clickMeButton = document.querySelector("#click-me");
-clickMeButton.addEventListener("click", makeRequest);
-
-function makeRequest() {
-    resultBlock.innerHTML = 'result';
-}

@@ -37,3 +37,36 @@ $.ajax('https://repetitora.net/api/JS/Images', {
         });
     }
 });
+
+N3
+//ajax-запрос при получении простой строки на входе принимает статус get. Запрос get может иметь список параметров, определённых разработчиками сервера. В моём коде у сервера есть параметры page и count. К ним я обратился при помощи шаблонной строки, ниже приведён код:
+const resultBlock = document.querySelector("#result");
+const clickMeButton = document.querySelector("#click-me");
+const pageNumber = document.querySelector("#page-number");
+clickMeButton.addEventListener("click", makeRequest);
+
+console.log(pageNumber);
+function makeRequest() {
+    $.ajax(`https://repetitora.net/api/JS/Images?page=${pageNumber.value}&count=1`, {
+    success: function (data) {
+        data.forEach(el => {
+            const img = document.createElement('img');
+            img.src = el.thumbnail;
+            document.querySelector('#result').appendChild(img);
+        });
+    }
+});
+}
+// По нажатию на ClickMe создаёт ajax-запрос:
+$.ajax(`https://repetitora.net/api/JS/Images?page=${pageNumber.value}&count=1`, {
+    success: function (data) {
+        data.forEach(el => {
+            const img = document.createElement('img');
+            img.src = el.thumbnail;
+            document.querySelector('#result').appendChild(img);
+        });
+    }// здесь значение параметра page считывается из input
+})
+
+
+Вот так выглядит index.html
