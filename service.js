@@ -6,14 +6,18 @@ function getImages(pageNumber) {
 }
 
 function getTasks() {
-    let promise = axios.get(`https://repetitora.net/api/JS/Tasks?widgetId=534235`);
+    const promise = axios.get(`https://repetitora.net/api/JS/Tasks?widgetId=534235`);
     return promise.then((response) => {
         return response.data;
     });
 }
 
 function createTasks(title) {
-    const promise = axios.post(`https://repetitora.net/api/JS/Tasks?widgetId=534235&title=${title}`);
+    const promise = axios.post(`https://repetitora.net/api/JS/Tasks`, 
+    {
+        widgetId: 534235,
+        title: title
+    });
     return promise.then((response) => {
         return response.data;
     });
